@@ -6,7 +6,7 @@ go build cmd/main.go
 
 ```
 
-Hadrcoded to serve at 127.0.0.1:50057 because why having a choice?
+Hardcoded to serve at 127.0.0.1:50057 because why having a choice?
 
 ## Can-do's and can-not-do's
 
