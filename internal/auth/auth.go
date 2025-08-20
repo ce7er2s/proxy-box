@@ -1,7 +1,6 @@
 package auth
 
 import (
-	"errors"
 	"fmt"
 	"io"
 	"slices"
@@ -40,22 +39,38 @@ var (
 	}
 )
 
-func (a *AuthProvider) ChooseAutenticationMethod(request []byte) (byte, []byte, error) {
-	if slices.Contains(request[2:2+request[1]], a.authentication_type) {
-		return a.authentication_type, a.authentication_response, nil
+func (a *AuthProvider) ChooseAutenticationMethod(rw io.ReadWriter) error {
+	buffer := make([]byte, 1024)
+	n, err := rw.Read(buffer)
+	if err != nil {
+		return fmt.Errorf("Can't authenticate client: %w", err)
 	}
 
-	return SOCKS_NO_ACCEPTABLE_AUTH_CODE,
-		SOCKS_NO_ACCEPTABLE_AUTH_RESPONSE,
-		errors.New("Can't authenticate client: no acceptable method found.")
+	request := buffer[:n]
+
+	if slices.Contains(request[2:2+request[1]], a.authentication_type) {
+		_, err = rw.Write(a.authentication_response)
+		return err
+	}
+
+	rw.Write(SOCKS_NO_ACCEPTABLE_AUTH_RESPONSE)
+	return fmt.Errorf("Can't authenticate client: no acceptable method found.")
 }
 
-func (a *AuthProvider) UseAuthenticateMethod(w io.Writer, data []byte) error {
+func (a *AuthProvider) UseAuthenticateMethod(rw io.ReadWriter) error {
+	buffer := make([]byte, 1024)
+	n, err := rw.Read(buffer)
+	if err != nil {
+		return fmt.Errorf("Can't authenticate client: %w", err)
+	}
+
+	request := buffer[:n]
+
 	switch a.authentication_type {
 	case SOCKS_NO_AUTH_CODE:
-		return a.AuthenticateNoAuth(w, data)
+		return a.AuthenticateNoAuth(rw, request)
 	case SOCKS_CRED_AUTH_CODE:
-		return a.AuthenticateCredentials(w, data)
+		return a.AuthenticateCredentials(rw, request)
 	default:
 		return fmt.Errorf("Authentication method 0x%X is not supported.", a.authentication_type)
 	}
