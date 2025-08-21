@@ -32,7 +32,7 @@ Can do shit in real-life testing:
 
 ## Known issues
 
-- SmartProxy password authentication is broken (probably client-side issues)
+- SmartProxy password authentication is broken (probably client-side issues) (RESOLVED)
 - io.Copy is not quite fittable to copy data between connections (but very fancy) 🧐 (RESOLVED)
 
 ## Author
