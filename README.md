@@ -18,7 +18,7 @@ Can't do shit about IPv6 addresses.
 Can do shit in real-life testing:
 
 - curl works fine
-- web extension Smart Proxy (mostly)
+- web extension Smart Proxy
 - ssh with ProxyCommand and netcat
 
 
@@ -27,7 +27,7 @@ Can do shit in real-life testing:
 - BIND
 - UDP ASSOCIATE
 - Hostname resolve (DONE)
-- IPv6
+- IPv6 (WIP)
 - Code refactoring (DONE)
 
 ## Known issues
