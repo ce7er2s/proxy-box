@@ -28,7 +28,7 @@ Can do shit in real-life testing:
 - UDP ASSOCIATE
 - Hostname resolve
 - IPv6
-- Code refactoring (WIP)
+- Code refactoring (DONE)
 
 
-You know the drill, author is me, `@ce7er2s`. For the rest of the drill go read that sweet LICENSE!
+You know the drill, author is me, `@ce7er2s`. For the rest of the drill go read that sweet LICENSE.
