@@ -13,12 +13,12 @@ Hardcoded to serve at 127.0.0.1:50057 because why having a choice?
 
 Can't do shit about BIND and UDP ASSOCIATE. (but who need them anyway?)
 
-Can't do shit about hostname resolve on server side (socks5h) and IPv6 addresses.
+Can't do shit about IPv6 addresses.
 
 Can do shit in real-life testing:
 
 - curl works fine
-- web extension Smart Proxy
+- web extension Smart Proxy (mostly)
 - ssh with ProxyCommand and netcat
 
 
@@ -26,14 +26,14 @@ Can do shit in real-life testing:
 
 - BIND
 - UDP ASSOCIATE
-- Hostname resolve
+- Hostname resolve (DONE)
 - IPv6
 - Code refactoring (DONE)
 
 ## Known issues
 
 - SmartProxy password authentication is broken (probably client-side issues)
-- io.Copy is not quite fittable to copy data between connections (but very fancy) 🧐
+- io.Copy is not quite fittable to copy data between connections (but very fancy) 🧐 (RESOLVED)
 
 ## Author
 

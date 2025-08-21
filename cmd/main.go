@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"log"
 	"net"
 
@@ -23,6 +24,9 @@ func ServeConnection(conn net.Conn, ap auth.AuthProvider) {
 
 	if err := dispatcher.Dispatcher(conn); err != nil {
 		log.Printf("Client %s dispatch failed: %s", conn.RemoteAddr(), err)
+		if errors.Is(err, dispatcher.SOCKS_ATYPE_NOT_SUPPORTED_ERROR) {
+			conn.Write(dispatcher.SOCKS_ATYPE_NOT_SUPPORTED_RESPONSE)
+		}
 		conn.Close()
 		return
 	}
