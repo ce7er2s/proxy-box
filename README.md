@@ -30,5 +30,11 @@ Can do shit in real-life testing:
 - IPv6
 - Code refactoring (DONE)
 
+## Known issues
+
+- SmartProxy password authentication is broken (probably client-side issues)
+- io.Copy is not quite fittable to copy data between connections (but very fancy) 🧐
+
+## Author
 
 You know the drill, author is me, `@ce7er2s`. For the rest of the drill go read that sweet LICENSE.
